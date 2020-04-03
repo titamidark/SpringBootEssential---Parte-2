@@ -27,3 +27,7 @@ menos que as mesmas tenham a notação "@Component"
    com isso, toda alteração no código após ser salva, vai startar o build e executar o projeto
 
 
+5. Na sua classe Endpoint, se você tiver apenas um método GET não vai precisar dentro da notação 
+"@RequestMappint" informar o path para o método ser informado. Como boa técnica, coloque na anotação
+do "@ReuqestMapping" da classe no plural. E também deve colocar a notação @AutoWired no construtor da classe.
+
