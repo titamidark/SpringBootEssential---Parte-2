@@ -27,7 +27,13 @@ menos que as mesmas tenham a notação "@Component"
    com isso, toda alteração no código após ser salva, vai startar o build e executar o projeto
 
 
-5. Na sua classe Endpoint, se você tiver apenas um método GET não vai precisar dentro da notação 
+5. Na sua classe Endpoint, se você tiver apenas um método GET não vai precisar dentro da notação
 "@RequestMappint" informar o path para o método ser informado. Como boa técnica, coloque na anotação
 do "@ReuqestMapping" da classe no plural. E também deve colocar a notação @AutoWired no construtor da classe.
+
+6. No postman, podemos chamar uma requisição várias vezes e vai nos retornar sempre os mesmos valoes. 
+Estudar os conceitos de "idempotent rest"
+
+7.Para reduzir código, no lugar das notações "@RequestMapping(method = RequestMethod.(PUT..DELETE..GET..)
+colocar as devidas notações... @PutMapping..@DeleteMapping... assim por adiante
 
