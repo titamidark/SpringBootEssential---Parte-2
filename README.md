@@ -36,6 +36,3 @@ Estudar os conceitos de "idempotent rest"
 
 7.Para reduzir código, no lugar das notações "@RequestMapping(method = RequestMethod.(PUT..DELETE..GET..)
 colocar as devidas notações... @PutMapping..@DeleteMapping... assim por adiante
-
-8. Git Hub para Leandro
-
