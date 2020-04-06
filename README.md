@@ -31,9 +31,11 @@ menos que as mesmas tenham a notação "@Component"
 "@RequestMappint" informar o path para o método ser informado. Como boa técnica, coloque na anotação
 do "@ReuqestMapping" da classe no plural. E também deve colocar a notação @AutoWired no construtor da classe.
 
-6. No postman, podemos chamar uma requisição várias vezes e vai nos retornar sempre os mesmos valoes. 
+6. No postman, podemos chamar uma requisição várias vezes e vai nos retornar sempre os mesmos valoes.
 Estudar os conceitos de "idempotent rest"
 
 7.Para reduzir código, no lugar das notações "@RequestMapping(method = RequestMethod.(PUT..DELETE..GET..)
 colocar as devidas notações... @PutMapping..@DeleteMapping... assim por adiante
+
+8. Git Hub para Leandro
 
