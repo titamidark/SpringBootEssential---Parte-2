@@ -24,6 +24,11 @@ public class CourseEndpoint {
         return new ResponseEntity<>(courseDAO.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(path = "/findByName/{nameCourse}")
+    public ResponseEntity<?> findByCourseByName(@PathVariable String nameCourse){
+        return new ResponseEntity<>(courseDAO.findByNameCourseIgnoreCaseContaining(nameCourse),HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Course course){
         return new ResponseEntity<>(courseDAO.save(course), HttpStatus.OK);
