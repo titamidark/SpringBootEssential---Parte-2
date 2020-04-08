@@ -1,6 +1,6 @@
 package br.com.altsystem.endpoint;
 
-import br.com.altsystem.error.CustomErrorType;
+import br.com.altsystem.error.ResourceNotFoundException;
 import br.com.altsystem.model.Student;
 import br.com.altsystem.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +28,14 @@ public class StudentEndpoint {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {
+        verifyIfStudentsExists(id);
         Optional<Student> student = studentDAO.findById(id);
-
-        if (student == null)
-            return new ResponseEntity<>(new CustomErrorType("Student NOT FOUND!"), HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @GetMapping(path = "/findByName/{name}")
-    public ResponseEntity<?> findStudentsByName(@PathVariable String name){
-        return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name),HttpStatus.OK);
+    public ResponseEntity<?> findStudentsByName(@PathVariable String name) {
+        return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
     }
 
     @PostMapping
@@ -47,13 +45,21 @@ public class StudentEndpoint {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
+        verifyIfStudentsExists(id);
         studentDAO.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody Student student) {
+        verifyIfStudentsExists(student.getId());
         studentDAO.save(student);
-        return new ResponseEntity<>(student, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(student, HttpStatus.OK);
+    }
+
+    private void verifyIfStudentsExists(Long id) {
+        Optional<Student> student = studentDAO.findById(id);
+        if (!student.isPresent())
+            throw new ResourceNotFoundException("Student not found for ID: " + id);
     }
 }
