@@ -1,6 +1,7 @@
 package br.com.altsystem.endpoint;
 
 import br.com.altsystem.error.CustomErrorType;
+import br.com.altsystem.error.ResourceNotFoundException;
 import br.com.altsystem.model.Course;
 import br.com.altsystem.repository.CourseRepository;
 import org.springframework.http.HttpStatus;
@@ -36,24 +37,32 @@ public class CourseEndpoint {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> getCourseById(@PathVariable("id") Long id){
+        verifyIfCourseExists(id);
         Optional<Course> course = courseDAO.findById(id);
-
-        if (course == null)
-            return new ResponseEntity<>(new CustomErrorType("Course Not Found"),HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(course,HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        verifyIfCourseExists(id);
         courseDAO.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody Course course) {
+        verifyIfCourseExists(course.getId());
         courseDAO.save(course);
         return new ResponseEntity<>(course, HttpStatus.OK);
     }
+
+    private void verifyIfCourseExists(Long id){
+        Optional<Course> course = courseDAO.findById(id);
+        if (!course.isPresent())
+            throw new ResourceNotFoundException("Course not found for ID " +id);
+    }
+
+
 
 }
 
