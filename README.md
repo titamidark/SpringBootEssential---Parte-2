@@ -37,5 +37,7 @@ Estudar os conceitos de "idempotent rest"
 7.Para reduzir código, no lugar das notações "@RequestMapping(method = RequestMethod.(PUT..DELETE..GET..)
 colocar as devidas notações... @PutMapping..@DeleteMapping... assim por adiante
 
-8. Na aula 11, foi adicionado o plugin "build generation" e quando for utilizar em uma classe, basta digitar alt+shift+b. Vinculado a ele cria-se um pacote "handler" para criar a classe por exemplo RestExceptionHandler...você consegue gerar as mensagens de exceção caso apareca algum erro., como por exemplo, deletar um registro que não existe... 
+8. Na aula 11, foi adicionado o plugin "build generation" e quando for utilizar em uma classe, basta digitar alt+shift+b. Vinculado a ele cria-se um pacote "handler" para criar a classe por exemplo RestExceptionHandler...você consegue gerar as mensagens de exceção caso apareca algum erro., como por exemplo, deletar um registro que não existe...
+
+9. Verificar se o hibernate está criando as tabelas do banco com o engine = "Innodb", para trabalhar com transações. Verificar na tabela em "alter Table". Se não criar, na configuração "application.properties", no dialect (MySQL8Dialect) colocar MySQL8InnoDBDialect.
 
